@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { GCAccount } from '../entity/gc-account.entity';
+import { GCAccount } from '../../entity/gc-account.entity';
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GCAccount } from '../entity/gc-account.entity';
+import { GCAccount } from '../../entity/gc-account.entity';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 
