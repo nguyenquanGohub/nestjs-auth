@@ -4,7 +4,9 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { RolePermission } from './role-permission.entity';
 
 @Entity({ name: 'permission' })
 export class Permission {
@@ -12,7 +14,7 @@ export class Permission {
   id: string;
 
   @Column({ length: 255 })
-  code: string;
+  code: string; // ví dụ: 'USER_CREATE', 'DEPT_READ'
 
   @Column({ length: 255 })
   name: string;
@@ -20,9 +22,12 @@ export class Permission {
   @Column({ length: 255, nullable: true })
   group: string;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  @CreateDateColumn()
+  created_at: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @OneToMany(() => RolePermission, (rp) => rp.permission)
+  rolePermissions: RolePermission[];
 }

@@ -3,10 +3,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Account } from './entities/account.entity';
+import { Department } from './entities/department.entity';
+import { Role } from './entities/role.entity';
+import { Permission } from './entities/permission.entity';
+import { AccountDepartmentRole } from './entities/account-department-role.entity';
+import { RolePermission } from './entities/role-permission.entity';
 
-import { UserModule } from './common/user/user.module';
-import { DepartmentModule } from './common/department/department.module';
-import { RolePermissionModule } from './common/role-permission/role-permission.module';
+import { AccountModule } from './account/account.module';
+import { DepartmentModule } from './department/department.module';
+import { RoleModule } from './role/role.module';
+import { PermissionModule } from './permission/permission.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,11 +26,21 @@ import { RolePermissionModule } from './common/role-permission/role-permission.m
       password: 'admin',
       database: 'test_auth',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
-    UserModule,
+    TypeOrmModule.forFeature([
+      Account,
+      Department,
+      Role,
+      Permission,
+      AccountDepartmentRole,
+      RolePermission,
+    ]),
+    AccountModule,
     DepartmentModule,
-    RolePermissionModule,
+    RoleModule,
+    PermissionModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
